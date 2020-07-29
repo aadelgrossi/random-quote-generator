@@ -1,32 +1,20 @@
 import React from 'react';
 
-import { MdTrendingFlat } from 'react-icons/md';
+import { useQuote } from '../../hooks/quote';
+import Quote from '../../components/Quote';
 
-import { Container, Author, Quote } from './styles';
+import { Container } from './styles';
 
 const Home: React.FC = () => {
+  const { randomQuote } = useQuote();
+
   return (
     <Container>
-      <Quote>
-        <p>
-          “The first rule of any technology used in a business is that
-          automation applied to an efficient operation will magnify the
-          efficiency. The second is that automation applied to an inefficient
-          operation will magnify the inefficiency.”
-        </p>
-      </Quote>
-
-      <Author>
-        <div>
-          <p>Bill Gates</p>
-          <span>war</span>
-        </div>
-        <div>
-          <a href="www.google.com">
-            <MdTrendingFlat size="26px" />
-          </a>
-        </div>
-      </Author>
+      <Quote
+        author={randomQuote.author}
+        category={randomQuote.genre}
+        content={randomQuote.text}
+      />
     </Container>
   );
 };
