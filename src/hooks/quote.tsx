@@ -1,43 +1,76 @@
-import React, { createContext, useContext, useCallback, useState } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useCallback,
+  useState,
+  useEffect,
+} from 'react';
 
 import api from '../services/api';
 
+interface QuoteResponse {
+  quote: {
+    quoteAuthor: string;
+    quoteGenre: string;
+    quoteText: string;
+  };
+}
+interface AuthorQuotesResponse {
+  quotes: QuoteResponse[];
+}
+
 interface Quote {
   author: string;
-  content: string;
-  category: string;
+  genre: string;
+  text: string;
 }
 
 interface QuoteContextData {
   randomQuote: Quote;
   quotesFromAuthor: Quote[];
-  getRandom(): Promise<Quote>;
-  getAllFromAuthor(author: string): Promise<Quote[]>;
+  getRandom(): void;
+  getAllFromAuthor(author: string): void;
 }
 
 const QuoteContext = createContext<QuoteContextData>({} as QuoteContextData);
 
 export const QuoteProvider: React.FC = ({ children }) => {
-  const [randomQuote, setRandomQuote] = useState({} as Quote);
-  const [quotesFromAuthor, setQuotesFromAuthor] = useState({} as Quote[]);
+  const [randomQuote, setRandomQuote] = useState<Quote>({} as Quote);
+  const [quotesFromAuthor, setQuotesFromAuthor] = useState<Quote[]>(
+    {} as Quote[],
+  );
 
   const getRandom = useCallback(async () => {
-    const response = await api.get('/quotes/random');
+    const response = await api.get<QuoteResponse>('/quotes/random');
 
-    setRandomQuote(response.data);
-
-    return response.data;
+    setRandomQuote({
+      author: response.data.quote.quoteAuthor,
+      genre: response.data.quote.quoteGenre,
+      text: response.data.quote.quoteText,
+    });
   }, []);
 
   const getAllFromAuthor = useCallback(async (author: string) => {
-    const response = await api.get(
+    const response = await api.get<AuthorQuotesResponse>(
       `/authors/${encodeURIComponent(author)}?page=1&limit=5`,
     );
 
-    setQuotesFromAuthor(response.data);
+    const mappedQuotesFromAuthor = response.data.quotes.map(
+      (q: QuoteResponse) => {
+        return {
+          author: q.quote.quoteAuthor,
+          genre: q.quote.quoteGenre,
+          text: q.quote.quoteText,
+        };
+      },
+    );
 
-    return response.data;
+    setQuotesFromAuthor(mappedQuotesFromAuthor);
   }, []);
+
+  useEffect(() => {
+    getRandom();
+  }, [getRandom]);
 
   return (
     <QuoteContext.Provider
