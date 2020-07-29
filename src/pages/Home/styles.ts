@@ -6,6 +6,7 @@ export const Container = styled.div`
   width: 80%;
   margin-top: 20vh;
 `;
+
 export const Quote = styled.div`
   font-size: max(24px, calc(2vw));
   position: relative;
@@ -17,29 +18,33 @@ export const Quote = styled.div`
     height: 100%;
     background-color: var(--accent);
     top: 0;
-    left: -100px;
+    left: max(-100px, -20%);
   }
 `;
 
 export const Author = styled.div`
-  margin-top: 10%;
+  margin-top: max(7vh, 40px);
+  margin-left: -2vw;
   display: flex;
   flex-direction: row;
-  padding: 50px 30px;
+  padding: 4vw 4vw;
+  width: 100%;
   cursor: pointer;
 
   div {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    width: 100%;
 
     p {
       font-weight: bold;
       color: var(--secondary);
+      font-size: max(16px, 1.5vw);
     }
 
     span {
-      font-size: 14px;
+      font-size: max(14px, 1vw);
       color: #828282;
     }
   }
@@ -47,6 +52,7 @@ export const Author = styled.div`
   a {
     color: #f2f2f2;
     margin-left: auto;
+    justify-content: center;
   }
 
   transition: background 200ms ease-in-out;

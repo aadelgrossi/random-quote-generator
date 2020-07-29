@@ -21,9 +21,11 @@ const Home: React.FC = () => {
           <p>Bill Gates</p>
           <span>war</span>
         </div>
-        <a href="www.google.com">
-          <MdTrendingFlat size="20px" />
-        </a>
+        <div>
+          <a href="www.google.com">
+            <MdTrendingFlat size="26px" />
+          </a>
+        </div>
       </Author>
     </Container>
   );
