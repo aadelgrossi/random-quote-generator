@@ -8,18 +8,23 @@ import React, {
 
 import api from '../services/api';
 
-interface QuoteResponse {
-  quote: {
-    quoteAuthor: string;
-    quoteGenre: string;
-    quoteText: string;
-  };
+interface QuoteResponseAttributes {
+  _id: string;
+  quoteAuthor: string;
+  quoteGenre: string;
+  quoteText: string;
 }
+
+interface QuoteResponse {
+  quote: QuoteResponseAttributes;
+}
+
 interface AuthorQuotesResponse {
-  quotes: QuoteResponse[];
+  quotes: Array<QuoteResponseAttributes>;
 }
 
 interface Quote {
+  id: string;
   author: string;
   genre: string;
   text: string;
@@ -44,6 +49,7 @@ export const QuoteProvider: React.FC = ({ children }) => {
     const response = await api.get<QuoteResponse>('/quotes/random');
 
     setRandomQuote({
+      id: response.data.quote._id,
       author: response.data.quote.quoteAuthor,
       genre: response.data.quote.quoteGenre,
       text: response.data.quote.quoteText,
@@ -56,11 +62,12 @@ export const QuoteProvider: React.FC = ({ children }) => {
     );
 
     const mappedQuotesFromAuthor = response.data.quotes.map(
-      (q: QuoteResponse) => {
+      (quote: QuoteResponseAttributes) => {
         return {
-          author: q.quote.quoteAuthor,
-          genre: q.quote.quoteGenre,
-          text: q.quote.quoteText,
+          id: quote._id,
+          author: quote.quoteAuthor,
+          genre: quote.quoteGenre,
+          text: quote.quoteText,
         };
       },
     );
