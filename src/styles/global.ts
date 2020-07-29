@@ -18,7 +18,6 @@ export default createGlobalStyle`
     box-sizing: border-box;
     background-color: #fff;
     -webkit-font-smoothing: antialised;
-    margin: 0 20vw;
 
   }
 

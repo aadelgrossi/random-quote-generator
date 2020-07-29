@@ -6,7 +6,7 @@ export const Container = styled.div`
   flex-direction: row;
 
   position: sticky;
-  margin-top: 5vh;
+  margin: 5vw 5vw 0;
 
   a {
     color: var(--secondary);
