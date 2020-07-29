@@ -27,6 +27,7 @@
     "html"
   ],
   "rules": {
+    "no-underscore-dangle": "off",
     "import/no-duplicates": "off",
     "no-unused-expressions": "off",
     "prettier/prettier": "error",
