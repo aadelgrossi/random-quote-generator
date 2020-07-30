@@ -1,15 +1,17 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
-  margin: 0 20vw;
+  margin: max(10rem, 10vw) 20vw 0;
 `;
 
-export const Author = styled.button`
+export const Author = styled(Link)`
   margin-top: max(7vh, 40px);
   margin-left: -2vw;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 
   padding: 4vw 4vw;
   width: 100%;

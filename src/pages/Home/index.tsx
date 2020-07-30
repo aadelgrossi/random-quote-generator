@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 
 import { MdTrendingFlat } from 'react-icons/md';
 import { useQuote } from '../../hooks/quote';
@@ -7,20 +7,13 @@ import Quote from '../../components/Quote';
 import { Container, Author } from './styles';
 
 const Home: React.FC = () => {
-  const { randomQuote, getAllFromAuthor } = useQuote();
-
-  const handleClick = useCallback(
-    authorName => {
-      getAllFromAuthor(authorName);
-    },
-    [getAllFromAuthor],
-  );
+  const { randomQuote } = useQuote();
 
   return (
     <Container>
-      <Quote id={randomQuote.id} content={randomQuote.text} />
+      <Quote content={randomQuote.text} />
 
-      <Author onClick={() => handleClick(randomQuote.author)}>
+      <Author to={`/author/${encodeURI(randomQuote.author)}`}>
         <span>
           <h3>{randomQuote.author}</h3>
           <span>{randomQuote.genre}</span>
