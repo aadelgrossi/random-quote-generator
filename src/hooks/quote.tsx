@@ -42,7 +42,7 @@ const QuoteContext = createContext<QuoteContextData>({} as QuoteContextData);
 export const QuoteProvider: React.FC = ({ children }) => {
   const [randomQuote, setRandomQuote] = useState<Quote>({} as Quote);
   const [quotesFromAuthor, setQuotesFromAuthor] = useState<Quote[]>(
-    {} as Quote[],
+    [] as Quote[],
   );
 
   const getRandom = useCallback(async () => {
