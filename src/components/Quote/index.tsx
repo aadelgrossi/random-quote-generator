@@ -3,13 +3,12 @@ import React from 'react';
 import { Container } from './styles';
 
 interface QuoteProps {
-  id: string;
   content: string;
 }
 
-const Quote: React.FC<QuoteProps> = ({ id, content }) => {
+const Quote: React.FC<QuoteProps> = ({ content }) => {
   return (
-    <Container key={id}>
+    <Container>
       <p>{content}</p>
     </Container>
   );
