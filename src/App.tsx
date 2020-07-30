@@ -1,22 +1,26 @@
 import React from 'react';
 
 import './assets/fonts';
+import { BrowserRouter } from 'react-router-dom';
 import GlobalStyle from './styles/global';
 import { QuoteProvider } from './hooks/quote';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
-import Home from './pages/Home';
+
+import Routes from './routes';
 
 const App: React.FC = () => {
   return (
     <>
-      <QuoteProvider>
-        <Header />
-        <Home />
+      <BrowserRouter>
+        <QuoteProvider>
+          <Header />
+          <Routes />
+        </QuoteProvider>
         <Footer />
-        <GlobalStyle />
-      </QuoteProvider>
+      </BrowserRouter>
+      <GlobalStyle />
     </>
   );
 };
