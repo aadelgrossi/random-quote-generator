@@ -3,9 +3,8 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 20vh;
 
-  font-size: max(20px, calc(2vw));
+  font-size: clamp(16px, 2vw, 26px);
   position: relative;
 
   &::before {

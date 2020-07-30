@@ -8,7 +8,7 @@ export const Container = styled.div`
   position: sticky;
   margin: 5vw 5vw 0;
 
-  a {
+  button {
     color: var(--secondary);
 
     display: block;
