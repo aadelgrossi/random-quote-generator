@@ -15,8 +15,8 @@ const Home: React.FC = () => {
 
       <Author to={`/author/${encodeURI(randomQuote.author)}`}>
         <span>
-          <h3>{randomQuote.author}</h3>
-          <span>{randomQuote.genre}</span>
+          <h3 data-testid="quote-author">{randomQuote.author}</h3>
+          <span data-testid="quote-genre">{randomQuote.genre}</span>
         </span>
         <MdTrendingFlat size="26px" />
       </Author>
