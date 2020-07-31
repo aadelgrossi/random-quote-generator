@@ -7,7 +7,7 @@ import AuthorQuotes from './pages/AuthorQuotes';
 const Routes: React.FC = () => (
   <Switch>
     <Route exact path="/" component={Home} />
-    <Route path="/author/:name" component={AuthorQuotes} />
+    <Route path="/authors/:name" component={AuthorQuotes} />
   </Switch>
 );
 

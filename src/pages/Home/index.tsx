@@ -13,7 +13,7 @@ const Home: React.FC = () => {
     <Container>
       <Quote content={randomQuote.text} />
 
-      <Author to={`/author/${encodeURI(randomQuote.author)}`}>
+      <Author data-testid="author-button" to={`/authors/${randomQuote.author}`}>
         <span>
           <h3 data-testid="quote-author">{randomQuote.author}</h3>
           <span data-testid="quote-genre">{randomQuote.genre}</span>

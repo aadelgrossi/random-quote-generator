@@ -58,7 +58,7 @@ export const QuoteProvider: React.FC = ({ children }) => {
 
   const getAllFromAuthor = useCallback(async (author: string) => {
     const response = await api.get<AuthorQuotesResponse>(
-      `/authors/${encodeURIComponent(author)}?page=1&limit=5`,
+      `/authors/${author}?page=1&limit=5`,
     );
 
     const mappedQuotesFromAuthor = response.data.quotes.map(
