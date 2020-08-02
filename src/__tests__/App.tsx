@@ -18,6 +18,10 @@ const actWait = async (amount = 0): Promise<void> => {
 };
 
 describe('Home', () => {
+  beforeEach(() => {
+    apiMock.reset();
+  });
+
   it('should be able to render a random quote', async () => {
     const { getByTestId } = render(<App />);
 
@@ -83,6 +87,57 @@ describe('Home', () => {
 
     expect(getByTestId('quote-content')).toHaveTextContent(
       'I always say you can never be extravagant with beauty. Beauty is God made real. Beauty is life.',
+    );
+  });
+
+  it('should redirect to Home when clicking header button on Author Quotes page', async () => {
+    const { getByText, getByTestId } = render(<App />);
+
+    apiMock.onGet('/quotes/random').replyOnce(200, {
+      statusCode: 200,
+      quote: {
+        _id: '5d91b45d9980192a317c880e',
+        quoteText: 'Learn from yesterday, live for today, hope for tomorrow.',
+        quoteAuthor: 'Albert Einstein',
+      },
+    });
+
+    apiMock.onGet('/authors/Albert Einstein?page=1&limit=5').replyOnce(200, {
+      statusCode: 200,
+      message: 'Quotes by Albert Einstein',
+      totalPages: 39047,
+      currentPage: 1,
+      quotes: [
+        {
+          _id: '5d91b45d9980192a317c87fd',
+          quoteText: 'God always takes the simplest way.',
+          quoteAuthor: 'Albert Einstein',
+        },
+      ],
+    });
+
+    apiMock.onGet('/quotes/random').reply(200, {
+      statusCode: 200,
+      quote: {
+        _id: '5d91b45d9980192a317c9cca',
+        quoteText: 'When in doubt, tell the truth.',
+        quoteAuthor: 'Mark Twain',
+      },
+    });
+
+    await actWait(500);
+
+    fireEvent.click(getByTestId('author-button'));
+
+    await actWait(500);
+
+    fireEvent.click(getByText('random'));
+
+    await actWait();
+
+    expect(window.location.pathname).toEqual('/');
+    expect(getByTestId('quote-content')).toHaveTextContent(
+      'When in doubt, tell the truth.',
     );
   });
 
