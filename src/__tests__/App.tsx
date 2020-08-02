@@ -18,10 +18,6 @@ const actWait = async (amount = 0): Promise<void> => {
 };
 
 describe('Home', () => {
-  afterEach(() => {
-    apiMock.resetHistory();
-  });
-
   it('should be able to render a random quote', async () => {
     const { getByTestId } = render(<App />);
 
