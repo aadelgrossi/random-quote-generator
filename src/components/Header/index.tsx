@@ -14,7 +14,7 @@ const Header: React.FC = () => {
     getRandom();
 
     if (location.pathname !== '/') {
-      history.push('/');
+      history.goBack();
     }
   }, [history, location, getRandom]);
 

@@ -8,11 +8,7 @@ import api from '../../services/api';
 const apiMock = new MockAdapter(api);
 
 describe('Quote Hook', () => {
-  it('should fetch a random quote from API and set randomQuote', async () => {
-    const { result, waitForNextUpdate } = renderHook(() => useQuote(), {
-      wrapper: QuoteProvider,
-    });
-
+  beforeEach(() => {
     apiMock.onGet('/quotes/random').replyOnce(200, {
       statusCode: 200,
       quote: {
@@ -23,9 +19,11 @@ describe('Quote Hook', () => {
         __v: 0,
       },
     });
+  });
 
-    act(() => {
-      result.current.getRandom();
+  it('should fetch a random quote from API and set randomQuote', async () => {
+    const { result, waitForNextUpdate } = renderHook(() => useQuote(), {
+      wrapper: QuoteProvider,
     });
 
     await waitForNextUpdate();

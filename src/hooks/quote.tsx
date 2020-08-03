@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useCallback, useState } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useCallback,
+  useState,
+  useEffect,
+} from 'react';
 
 import api from '../services/api';
 
@@ -52,6 +58,10 @@ export const QuoteProvider: React.FC = ({ children }) => {
 
     setQuotesFromAuthor(mappedQuotesFromAuthor);
   }, []);
+
+  useEffect(() => {
+    getRandom();
+  }, [getRandom]);
 
   return (
     <QuoteContext.Provider
