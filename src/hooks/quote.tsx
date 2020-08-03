@@ -1,27 +1,8 @@
-import React, {
-  createContext,
-  useContext,
-  useCallback,
-  useState,
-  useEffect,
-} from 'react';
+import React, { createContext, useContext, useCallback, useState } from 'react';
 
 import api from '../services/api';
 
-interface QuoteResponseAttributes {
-  _id: string;
-  quoteAuthor: string;
-  quoteGenre: string;
-  quoteText: string;
-}
-
-interface QuoteResponse {
-  quote: QuoteResponseAttributes;
-}
-
-interface AuthorQuotesResponse {
-  quotes: Array<QuoteResponseAttributes>;
-}
+import { QuoteResponse, AuthorQuotesResponse } from './dtos/QuotesResponse';
 
 interface Quote {
   id: string;
@@ -58,26 +39,19 @@ export const QuoteProvider: React.FC = ({ children }) => {
 
   const getAllFromAuthor = useCallback(async (author: string) => {
     const response = await api.get<AuthorQuotesResponse>(
-      `/authors/${encodeURIComponent(author)}?page=1&limit=5`,
+      `/authors/${author}?page=1&limit=5`,
     );
-
-    const mappedQuotesFromAuthor = response.data.quotes.map(
-      (quote: QuoteResponseAttributes) => {
-        return {
-          id: quote._id,
-          author: quote.quoteAuthor,
-          genre: quote.quoteGenre,
-          text: quote.quoteText,
-        };
-      },
-    );
+    const mappedQuotesFromAuthor = response.data.quotes.map(quote => {
+      return {
+        id: quote._id,
+        author: quote.quoteAuthor,
+        genre: quote.quoteGenre,
+        text: quote.quoteText,
+      };
+    });
 
     setQuotesFromAuthor(mappedQuotesFromAuthor);
   }, []);
-
-  useEffect(() => {
-    getRandom();
-  }, [getRandom]);
 
   return (
     <QuoteContext.Provider
