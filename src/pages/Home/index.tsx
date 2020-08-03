@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import { MdTrendingFlat } from 'react-icons/md';
 import { useQuote } from '../../hooks/quote';
@@ -7,11 +7,7 @@ import Quote from '../../components/Quote';
 import { Container, Author } from './styles';
 
 const Home: React.FC = () => {
-  const { getRandom, randomQuote } = useQuote();
-
-  useEffect(() => {
-    getRandom();
-  }, [getRandom]);
+  const { randomQuote } = useQuote();
 
   return (
     <Container>
