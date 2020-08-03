@@ -16,8 +16,9 @@ $ yarn start
 ```
 
 ## :construction:  TODO
-- :x: Live demo
-- :x: Tests
+- :soon: Live demo
+- :ballot_box_with_check: Tests
+- :heavy_exclamation_mark: Replace axios with swr, simplify hook
 - :x: Loading state
 - :x: Animations and transitions
 - :x: Full text search
