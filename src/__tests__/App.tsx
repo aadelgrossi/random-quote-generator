@@ -67,6 +67,8 @@ describe('Home', () => {
       "As a kid, all I thought about was death. But you can't tell your parents that.",
     );
 
+    await actWait(500);
+
     apiMock.onGet('/quotes/random').replyOnce(200, {
       statusCode: 200,
       quote: {
@@ -129,11 +131,15 @@ describe('Home', () => {
 
     fireEvent.click(getByTestId('author-button'));
 
+    expect(window.location.pathname).toEqual(
+      encodeURI('/authors/Albert Einstein'),
+    );
+
     await actWait(500);
 
     fireEvent.click(getByText('random'));
 
-    await actWait();
+    await actWait(500);
 
     expect(window.location.pathname).toEqual('/');
     expect(getByTestId('quote-content')).toHaveTextContent(
