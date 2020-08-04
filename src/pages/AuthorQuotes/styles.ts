@@ -7,7 +7,7 @@ export const Quotes = styled.div`
   margin: 10vh 15vw 10vh;
 
   div + div {
-    margin-top: min(4rem, 8vh);
+    margin-top: 4rem;
   }
 
   @media (max-width: 720px) {
@@ -30,7 +30,7 @@ export const BackButton = styled.button`
 
 export const Header = styled.div`
   margin-left: 8vw;
-  margin-top: max(5rem, 5vh);
+  margin-top: 5rem;
   display: flex;
   flex-direction: row;
 

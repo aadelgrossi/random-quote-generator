@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
-  margin: 30vh max(2rem, 20vw) 0;
+  margin: 30vh 20vw 0;
 
   @media (max-width: 720px) {
     margin: 20vh 4rem;
@@ -10,16 +10,20 @@ export const Container = styled.div`
 `;
 
 export const Author = styled(Link)`
-  margin-top: max(7vh, 40px);
+  margin-top: 4rem;
   margin-left: -2vw;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 
-  padding: min(3rem, 4vw);
+  padding: 2.5rem;
   width: 100%;
   cursor: pointer;
+
+  @media (max-width: 500px) {
+    padding: 1.5rem;
+  }
 
   transition: background 200ms ease-in-out;
 

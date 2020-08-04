@@ -10,6 +10,6 @@ export const Container = styled.div`
     margin-bottom: 1rem;
     color: #a9a9a9;
     font-family: 'Montserrat';
-    font-size: max(12px, 0.8vw);
+    font-size: 0.5em;
   }
 `;
