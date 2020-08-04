@@ -18,18 +18,34 @@ export default createGlobalStyle`
     box-sizing: border-box;
     background-color: #fff;
     -webkit-font-smoothing: antialised;
-
-  }
+    
+}
 
   #root {
     height: 100vh;
     display: flex;
     flex-direction: column;
+    font-size: 13px;
 
-  }
+    @media (min-width: 375px) {
+      font-size: 14px;
+    }
 
-  body, input, button {
-    font-size: 16px;
+    @media (min-width: 500px) {
+      font-size: 16px;
+    }
+
+    @media (min-width: 720px) {
+      font-size: 18px;
+    }
+
+    @media (min-width: 1280px) {
+      font-size: 19px;
+    }
+
+    @media (min-width: 1600px) {
+      font-size: 21px;
+    }
   }
 
   button {
@@ -45,6 +61,16 @@ export default createGlobalStyle`
     font-weight: 700;
   }
 
+  h1 {
+    font-size: 2.3em;
+  }
+
+  h3 {
+    font-size: 1.3em;
+  }
+
+  
+
   strong {
     font-weight: 700;
   }
@@ -52,5 +78,5 @@ export default createGlobalStyle`
   a {
     text-decoration: none;
   }
-
+  
 `;

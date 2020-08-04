@@ -18,7 +18,7 @@ const Home: React.FC = () => {
           <h3 data-testid="quote-author">{randomQuote.author}</h3>
           <span data-testid="quote-genre">{randomQuote.genre}</span>
         </span>
-        <MdTrendingFlat size="26px" />
+        <MdTrendingFlat size="1.5em" />
       </Author>
     </Container>
   );

@@ -2,7 +2,11 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
-  margin: max(10rem, 10vw) 20vw 0;
+  margin: 30vh max(2rem, 20vw) 0;
+
+  @media (max-width: 720px) {
+    margin: 20vh 4rem;
+  }
 `;
 
 export const Author = styled(Link)`
@@ -13,7 +17,7 @@ export const Author = styled(Link)`
   justify-content: space-between;
   align-items: center;
 
-  padding: 4vw 4vw;
+  padding: min(3rem, 4vw);
   width: 100%;
   cursor: pointer;
 
@@ -23,15 +27,14 @@ export const Author = styled(Link)`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    font-size: 0.9em;
 
     h3 {
       font-weight: bold;
       color: var(--secondary);
-      font-size: max(16px, 1.5vw);
     }
 
     span {
-      font-size: max(14px, 1vw);
       color: #828282;
     }
   }

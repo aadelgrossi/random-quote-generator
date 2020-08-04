@@ -22,7 +22,7 @@ const AuthorQuotes: React.FC = () => {
         <BackButton onClick={() => history.goBack()}>
           <MdArrowBack size="24px" />
         </BackButton>
-        <h1>{name}</h1>
+        <h2>{name}</h2>
       </Header>
       <Quotes>
         {quotesFromAuthor.map(quote => (

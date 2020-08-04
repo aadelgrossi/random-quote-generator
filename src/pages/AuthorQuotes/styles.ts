@@ -4,10 +4,14 @@ import { shade } from 'polished';
 export const Container = styled.div``;
 
 export const Quotes = styled.div`
-  margin: 10vh 20vw 10vh;
+  margin: 10vh 15vw 10vh;
 
   div + div {
-    margin-top: max(3rem, 8vh);
+    margin-top: min(4rem, 8vh);
+  }
+
+  @media (max-width: 720px) {
+    margin: 5vh 4rem 10vh;
   }
 `;
 

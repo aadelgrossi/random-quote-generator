@@ -6,7 +6,7 @@ export const Container = styled.div`
   flex-direction: row;
 
   position: sticky;
-  margin: 5vw 5vw 0;
+  margin: 10vh 5vw 0;
 
   button {
     color: var(--secondary);
