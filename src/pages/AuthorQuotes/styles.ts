@@ -1,17 +1,18 @@
 import styled from 'styled-components';
 import { shade } from 'polished';
 
-export const Container = styled.div``;
+export const Container = styled.div`
+  margin: 5vh 15vw 10vh;
+  @media (max-width: 720px) {
+    margin: 5vh 4rem 10vh;
+  }
+`;
 
 export const Quotes = styled.div`
-  margin: 10vh 15vw 10vh;
+  margin-top: 5rem;
 
   div + div {
     margin-top: 4rem;
-  }
-
-  @media (max-width: 720px) {
-    margin: 5vh 4rem 10vh;
   }
 `;
 
@@ -29,7 +30,6 @@ export const BackButton = styled.button`
 `;
 
 export const Header = styled.div`
-  margin-left: 8vw;
   margin-top: 5rem;
   display: flex;
   flex-direction: row;
