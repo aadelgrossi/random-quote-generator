@@ -5,10 +5,18 @@ import { MdArrowBack } from 'react-icons/md';
 import Quote from '../../components/Quote';
 import { useQuote } from '../../hooks/quote';
 
-import { Container, Quotes, BackButton, Header } from './styles';
+import {
+  Container,
+  Quotes,
+  BackButton,
+  Header,
+  LoadingContainer,
+} from './styles';
+
+import Loading from '../../components/LoadingDots';
 
 const AuthorQuotes: React.FC = () => {
-  const { getAllFromAuthor, quotesFromAuthor } = useQuote();
+  const { getAllFromAuthor, quotesFromAuthor, loading } = useQuote();
   const { name } = useParams();
   const history = useHistory();
 
@@ -24,11 +32,17 @@ const AuthorQuotes: React.FC = () => {
         </BackButton>
         <h2>{name}</h2>
       </Header>
-      <Quotes>
-        {quotesFromAuthor.map(quote => (
-          <Quote key={quote.id} content={quote.text} />
-        ))}
-      </Quotes>
+      {loading ? (
+        <LoadingContainer>
+          <Loading />
+        </LoadingContainer>
+      ) : (
+        <Quotes>
+          {quotesFromAuthor.map(quote => (
+            <Quote key={quote.id} content={quote.text} />
+          ))}
+        </Quotes>
+      )}
     </Container>
   );
 };

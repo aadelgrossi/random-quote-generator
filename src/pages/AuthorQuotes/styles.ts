@@ -36,3 +36,7 @@ export const Header = styled.div`
 
   align-items: center;
 `;
+
+export const LoadingContainer = styled.div`
+  margin-top: 20vh;
+`;
