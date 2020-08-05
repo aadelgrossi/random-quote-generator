@@ -20,6 +20,7 @@ interface Quote {
 interface QuoteContextData {
   randomQuote: Quote;
   quotesFromAuthor: Quote[];
+  loading: boolean;
   getRandom(): void;
   getAllFromAuthor(author: string): void;
 }
@@ -27,12 +28,15 @@ interface QuoteContextData {
 const QuoteContext = createContext<QuoteContextData>({} as QuoteContextData);
 
 export const QuoteProvider: React.FC = ({ children }) => {
+  const [loading, setLoading] = useState(false);
   const [randomQuote, setRandomQuote] = useState<Quote>({} as Quote);
+  const [currentAuthor, setCurrentAuthor] = useState('');
   const [quotesFromAuthor, setQuotesFromAuthor] = useState<Quote[]>(
     [] as Quote[],
   );
 
   const getRandom = useCallback(async () => {
+    setLoading(true);
     const response = await api.get<QuoteResponse>('/quotes/random');
 
     setRandomQuote({
@@ -41,31 +45,52 @@ export const QuoteProvider: React.FC = ({ children }) => {
       genre: response.data.quote.quoteGenre,
       text: response.data.quote.quoteText,
     });
+
+    setQuotesFromAuthor([]);
+    setLoading(false);
   }, []);
 
-  const getAllFromAuthor = useCallback(async (author: string) => {
-    const response = await api.get<AuthorQuotesResponse>(
-      `/authors/${author}?page=1&limit=5`,
-    );
-    const mappedQuotesFromAuthor = response.data.quotes.map(quote => {
-      return {
-        id: quote._id,
-        author: quote.quoteAuthor,
-        genre: quote.quoteGenre,
-        text: quote.quoteText,
-      };
-    });
+  const getAllFromAuthor = useCallback(
+    async (author: string) => {
+      setLoading(true);
 
-    setQuotesFromAuthor(mappedQuotesFromAuthor);
-  }, []);
+      if (currentAuthor !== author) {
+        const response = await api.get<AuthorQuotesResponse>(
+          `/authors/${author}?page=1&limit=5`,
+        );
+        const mappedQuotesFromAuthor = response.data.quotes.map(quote => {
+          return {
+            id: quote._id,
+            author: quote.quoteAuthor,
+            genre: quote.quoteGenre,
+            text: quote.quoteText,
+          };
+        });
+
+        setCurrentAuthor(author);
+        setQuotesFromAuthor(mappedQuotesFromAuthor);
+      }
+
+      setLoading(false);
+    },
+    [currentAuthor],
+  );
 
   useEffect(() => {
+    setLoading(true);
     getRandom();
+    setLoading(false);
   }, [getRandom]);
 
   return (
     <QuoteContext.Provider
-      value={{ randomQuote, quotesFromAuthor, getRandom, getAllFromAuthor }}
+      value={{
+        randomQuote,
+        quotesFromAuthor,
+        loading,
+        getRandom,
+        getAllFromAuthor,
+      }}
     >
       {children}
     </QuoteContext.Provider>
