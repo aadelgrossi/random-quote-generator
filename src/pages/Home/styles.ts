@@ -2,6 +2,11 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
+  background-color: ${props => props.theme.colors.background};
+  color: ${props => props.theme.colors.text};
+`;
+
+export const Contents = styled.div`
   margin: 30vh 20vw 0;
 
   @media (max-width: 720px) {
@@ -59,7 +64,7 @@ export const Author = styled(Link)`
     }
 
     svg {
-      color: ${props => props.theme.colors.primary};
+      color: ${props => props.theme.colors.button};
     }
   }
 `;

@@ -5,5 +5,5 @@ export const Container = styled.div`
   flex-direction: column;
 
   padding-left: 3rem;
-  border-left: 8px solid var(--accent);
+  border-left: 8px solid #f7df94;
 `;

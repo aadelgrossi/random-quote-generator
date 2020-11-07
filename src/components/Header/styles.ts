@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 import { shade } from 'polished';
 
+export const Wrapper = styled.div`
+  background-color: ${props => props.theme.colors.background};
+`;
+
 export const Container = styled.div`
   display: flex;
   flex-direction: row;
@@ -9,7 +13,7 @@ export const Container = styled.div`
   margin: 10vh 5vw 0;
 
   button {
-    color: ${props => props.theme.colors.secondary};
+    color: ${props => props.theme.colors.tertiary};
 
     display: block;
     justify-content: center;
