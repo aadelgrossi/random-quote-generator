@@ -59,7 +59,7 @@ export const Author = styled(Link)`
     }
 
     svg {
-      color: ${props => props.theme.colors.white};
+      color: ${props => props.theme.colors.primary};
     }
   }
 `;

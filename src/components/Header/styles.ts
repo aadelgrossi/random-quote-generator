@@ -9,7 +9,7 @@ export const Container = styled.div`
   margin: 10vh 5vw 0;
 
   button {
-    color: var(--secondary);
+    color: ${props => props.theme.colors.secondary};
 
     display: block;
     justify-content: center;
