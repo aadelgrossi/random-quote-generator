@@ -1,20 +1,17 @@
-import React, { useCallback, useContext } from 'react';
+import React, { useCallback } from 'react';
 
 import { MdCached } from 'react-icons/md';
 import { useLocation, useHistory } from 'react-router-dom';
 import Switch from 'react-switch';
-import { ThemeContext } from 'styled-components';
-import { Container, Wrapper } from './styles';
+
 import { useQuote } from '../../hooks/quote';
+import { useTheme } from '../../hooks/theme';
 import DarkIcon from '../DarkIcon';
 import LightIcon from '../LightIcon';
+import { Container, Wrapper } from './styles';
 
-interface HeaderProps {
-  toggleTheme(): void;
-}
-
-const Header: React.FC<HeaderProps> = ({ toggleTheme }) => {
-  const { colors, title } = useContext(ThemeContext);
+const Header: React.FC = () => {
+  const { theme, toggleTheme } = useTheme();
   const { getRandom } = useQuote();
   const history = useHistory();
   const location = useLocation();
@@ -32,11 +29,11 @@ const Header: React.FC<HeaderProps> = ({ toggleTheme }) => {
       <Container>
         <Switch
           onChange={toggleTheme}
-          checked={title === 'light'}
-          onHandleColor={colors.primary}
-          offHandleColor={colors.primary}
-          onColor={colors.secondary}
-          offColor={colors.secondary}
+          checked={theme.title === 'light'}
+          onHandleColor={theme.colors.primary}
+          offHandleColor={theme.colors.primary}
+          onColor={theme.colors.secondary}
+          offColor={theme.colors.secondary}
           width={60}
           uncheckedIcon={<DarkIcon />}
           checkedIcon={<LightIcon />}

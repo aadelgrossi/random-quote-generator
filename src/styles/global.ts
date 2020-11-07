@@ -7,6 +7,7 @@ export default createGlobalStyle`
     box-sizing: border-box;
     outline: 0; 
     font-family: 'Raleway';
+    transition: background-color 0.3s ease-in-out;
   }
 
   body {
