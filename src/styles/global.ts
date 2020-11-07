@@ -5,18 +5,12 @@ export default createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    outline: 0;
+    outline: 0; 
     font-family: 'Raleway';
-
-    --primary: #000;
-    --secondary: #4f4f4f;
-    --accent: #f7df94;
-
   }
 
   body {
     box-sizing: border-box;
-    background-color: #fff;
     -webkit-font-smoothing: antialised;
     
 }

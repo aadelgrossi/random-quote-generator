@@ -46,6 +46,7 @@ describe('AuthorQuotes', () => {
     useQuoteMocked.mockReturnValue({
       getAllFromAuthor: jest.fn(),
       getRandom: jest.fn(),
+      loading: false,
       randomQuote: {} as QuoteAttributes,
       quotesFromAuthor: [
         {

@@ -11,6 +11,7 @@ import {
   BackButton,
   Header,
   LoadingContainer,
+  BackgroundWrapper,
 } from './styles';
 
 import Loading from '../../components/LoadingDots';
@@ -25,25 +26,27 @@ const AuthorQuotes: React.FC = () => {
   }, [getAllFromAuthor, name]);
 
   return (
-    <Container>
-      <Header>
-        <BackButton onClick={() => history.goBack()}>
-          <MdArrowBack size="24px" />
-        </BackButton>
-        <h2>{name}</h2>
-      </Header>
-      {loading ? (
-        <LoadingContainer>
-          <Loading />
-        </LoadingContainer>
-      ) : (
-        <Quotes>
-          {quotesFromAuthor.map(quote => (
-            <Quote key={quote.id} content={quote.text} />
-          ))}
-        </Quotes>
-      )}
-    </Container>
+    <BackgroundWrapper>
+      <Container>
+        <Header>
+          <BackButton onClick={() => history.goBack()}>
+            <MdArrowBack size="24px" />
+          </BackButton>
+          <h2>{name}</h2>
+        </Header>
+        {loading ? (
+          <LoadingContainer>
+            <Loading />
+          </LoadingContainer>
+        ) : (
+          <Quotes>
+            {quotesFromAuthor.map(quote => (
+              <Quote key={quote.id} content={quote.text} />
+            ))}
+          </Quotes>
+        )}
+      </Container>
+    </BackgroundWrapper>
   );
 };
 

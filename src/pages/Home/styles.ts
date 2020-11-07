@@ -2,6 +2,11 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
+  background-color: ${props => props.theme.colors.background};
+  color: ${props => props.theme.colors.text};
+`;
+
+export const Contents = styled.div`
   margin: 30vh 20vw 0;
 
   @media (max-width: 720px) {
@@ -35,11 +40,11 @@ export const Author = styled(Link)`
 
     h3 {
       font-weight: bold;
-      color: var(--secondary);
+      color: ${props => props.theme.colors.secondary};
     }
 
     span {
-      color: #828282;
+      color: ${props => props.theme.colors.tertiary};
     }
   }
 
@@ -48,18 +53,18 @@ export const Author = styled(Link)`
   }
 
   &:hover {
-    background-color: #333333;
+    background-color: ${props => props.theme.colors.hover};
     span {
       h3 {
-        color: #f2f2f2;
+        color: ${props => props.theme.colors.primary};
       }
       span {
-        color: #828282;
+        color: ${props => props.theme.colors.tertiary};
       }
     }
 
     svg {
-      color: #f2f2f2;
+      color: ${props => props.theme.colors.primary};
     }
   }
 `;

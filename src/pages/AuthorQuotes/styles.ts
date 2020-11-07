@@ -1,5 +1,9 @@
 import styled from 'styled-components';
-import { shade } from 'polished';
+
+export const BackgroundWrapper = styled.div`
+  background-color: ${props => props.theme.colors.background};
+  color: ${props => props.theme.colors.text};
+`;
 
 export const Container = styled.div`
   margin: 5vh 15vw 10vh;
@@ -25,7 +29,7 @@ export const BackButton = styled.button`
   }
 
   &:hover {
-    color: ${shade(0.2, '#f4ede8')};
+    color: ${props => props.theme.colors.hover};
   }
 `;
 

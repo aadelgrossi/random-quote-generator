@@ -1,11 +1,20 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useContext } from 'react';
 
 import { MdCached } from 'react-icons/md';
 import { useLocation, useHistory } from 'react-router-dom';
-import { Container } from './styles';
+import Switch from 'react-switch';
+import { ThemeContext } from 'styled-components';
+import { Container, Wrapper } from './styles';
 import { useQuote } from '../../hooks/quote';
+import DarkIcon from '../DarkIcon';
+import LightIcon from '../LightIcon';
 
-const Header: React.FC = () => {
+interface HeaderProps {
+  toggleTheme(): void;
+}
+
+const Header: React.FC<HeaderProps> = ({ toggleTheme }) => {
+  const { colors, title } = useContext(ThemeContext);
   const { getRandom } = useQuote();
   const history = useHistory();
   const location = useLocation();
@@ -19,12 +28,25 @@ const Header: React.FC = () => {
   }, [history, location, getRandom]);
 
   return (
-    <Container>
-      <button type="button" onClick={handleClick}>
-        random
-        <MdCached />
-      </button>
-    </Container>
+    <Wrapper>
+      <Container>
+        <Switch
+          onChange={toggleTheme}
+          checked={title === 'light'}
+          onHandleColor={colors.primary}
+          offHandleColor={colors.primary}
+          onColor={colors.secondary}
+          offColor={colors.secondary}
+          width={60}
+          uncheckedIcon={<DarkIcon />}
+          checkedIcon={<LightIcon />}
+        />
+        <button type="button" onClick={handleClick}>
+          random
+          <MdCached />
+        </button>
+      </Container>
+    </Wrapper>
   );
 };
 
