@@ -35,11 +35,11 @@ export const Author = styled(Link)`
 
     h3 {
       font-weight: bold;
-      color: var(--secondary);
+      color: ${props => props.theme.colors.secondary};
     }
 
     span {
-      color: #828282;
+      color: ${props => props.theme.colors.tertiary};
     }
   }
 
@@ -48,18 +48,18 @@ export const Author = styled(Link)`
   }
 
   &:hover {
-    background-color: #333333;
+    background-color: ${props => props.theme.colors.hoverBackground};
     span {
       h3 {
         color: #f2f2f2;
       }
       span {
-        color: #828282;
+        color: ${props => props.theme.colors.tertiary};
       }
     }
 
     svg {
-      color: #f2f2f2;
+      color: ${props => props.theme.colors.white};
     }
   }
 `;

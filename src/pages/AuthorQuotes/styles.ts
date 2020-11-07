@@ -25,7 +25,7 @@ export const BackButton = styled.button`
   }
 
   &:hover {
-    color: ${shade(0.2, '#f4ede8')};
+    color: ${shade(0.2, '#f2f2f2')};
   }
 `;
 
