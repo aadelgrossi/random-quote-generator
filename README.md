@@ -22,7 +22,7 @@ $ yarn start
 - :ballot_box_with_check: Tests
 - :x: Replace axios with swr, simplify hook
 - :ballot_box_with_check: Loading state
-- :x: Dark theme
+- :ballot_box_with_check: Dark/light theme switcher
 - :x: Animations and transitions
 - :x: Full text search
 - :x: Pagination
