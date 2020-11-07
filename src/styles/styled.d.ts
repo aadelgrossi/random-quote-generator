@@ -9,8 +9,8 @@ declare module 'styled-components' {
       secondary: string;
       tertiary: string;
       background: string;
-      accent: string;
       hoverBackground: string;
+      button: string;
     };
   }
 }
