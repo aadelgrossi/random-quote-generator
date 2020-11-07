@@ -1,9 +1,11 @@
+/* eslint-disable import/order */
 /* eslint-disable import/first */
 
 import React from 'react';
-import { mocked } from 'ts-jest/utils';
+
 import { render, screen } from '@testing-library/react';
 import { mount } from 'enzyme';
+import { mocked } from 'ts-jest/utils';
 
 import AuthorQuotes from '../pages/AuthorQuotes';
 import Quote from '../components/Quote';

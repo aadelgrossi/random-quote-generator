@@ -1,8 +1,8 @@
 import { renderHook } from '@testing-library/react-hooks';
-import { act } from 'react-test-renderer';
 import MockAdapter from 'axios-mock-adapter';
-import { useQuote, QuoteProvider } from '../../hooks/quote';
+import { act } from 'react-test-renderer';
 
+import { QuoteProvider, useQuote } from '../../hooks/quote';
 import api from '../../services/api';
 
 const apiMock = new MockAdapter(api);

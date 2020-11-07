@@ -1,9 +1,10 @@
 import React from 'react';
-import { render, act, fireEvent } from '@testing-library/react';
+
+import { act, fireEvent, render } from '@testing-library/react';
 import MockAdapter from 'axios-mock-adapter';
 
-import api from '../services/api';
 import App from '../App';
+import api from '../services/api';
 
 const apiMock = new MockAdapter(api);
 
@@ -93,7 +94,7 @@ describe('Home', () => {
   });
 
   it('should redirect to Home when clicking header button on Author Quotes page', async () => {
-    const { getByText, getByTestId } = render(<App />);
+    const { getByTestId, getByText } = render(<App />);
 
     apiMock.onGet('/quotes/random').replyOnce(200, {
       statusCode: 200,

@@ -1,14 +1,13 @@
 import React, {
   createContext,
-  useContext,
   useCallback,
-  useState,
+  useContext,
   useEffect,
+  useState,
 } from 'react';
 
 import api from '../services/api';
-
-import { QuoteResponse, AuthorQuotesResponse } from './dtos/QuotesResponse';
+import { AuthorQuotesResponse, QuoteResponse } from './dtos/QuotesResponse';
 
 interface Quote {
   id: string;

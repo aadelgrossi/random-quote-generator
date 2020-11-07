@@ -1,23 +1,22 @@
 import React, { useEffect } from 'react';
 
-import { useParams, useHistory } from 'react-router-dom';
 import { MdArrowBack } from 'react-icons/md';
-import Quote from '../../components/Quote';
-import { useQuote } from '../../hooks/quote';
-
-import {
-  Container,
-  Quotes,
-  BackButton,
-  Header,
-  LoadingContainer,
-  BackgroundWrapper,
-} from './styles';
+import { useHistory, useParams } from 'react-router-dom';
 
 import Loading from '../../components/LoadingDots';
+import Quote from '../../components/Quote';
+import { useQuote } from '../../hooks/quote';
+import {
+  BackButton,
+  BackgroundWrapper,
+  Container,
+  Header,
+  LoadingContainer,
+  Quotes,
+} from './styles';
 
 const AuthorQuotes: React.FC = () => {
-  const { getAllFromAuthor, quotesFromAuthor, loading } = useQuote();
+  const { getAllFromAuthor, loading, quotesFromAuthor } = useQuote();
   const { name } = useParams();
   const history = useHistory();
 

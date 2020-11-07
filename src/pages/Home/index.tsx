@@ -1,14 +1,14 @@
 import React from 'react';
 
 import { MdTrendingFlat } from 'react-icons/md';
-import { useQuote } from '../../hooks/quote';
-import Quote from '../../components/Quote';
 
-import { Container, Author, Contents } from './styles';
 import Loading from '../../components/LoadingDots';
+import Quote from '../../components/Quote';
+import { useQuote } from '../../hooks/quote';
+import { Author, Container, Contents } from './styles';
 
 const Home: React.FC = () => {
-  const { randomQuote, loading } = useQuote();
+  const { loading, randomQuote } = useQuote();
 
   return (
     <Container>

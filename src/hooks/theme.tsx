@@ -1,4 +1,4 @@
-import React, { useCallback, createContext, useContext } from 'react';
+import React, { createContext, useCallback, useContext } from 'react';
 
 import { DefaultTheme, ThemeProvider } from 'styled-components';
 
