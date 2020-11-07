@@ -1,8 +1,14 @@
 import React from 'react';
+import { ThemeProvider } from 'styled-components';
 import { QuoteProvider } from './quote';
+import light from '../styles/themes/light';
 
 const AppProvider: React.FC = ({ children }) => {
-  return <QuoteProvider>{children}</QuoteProvider>;
+  return (
+    <ThemeProvider theme={light}>
+      <QuoteProvider>{children}</QuoteProvider>
+    </ThemeProvider>
+  );
 };
 
 export default AppProvider;
