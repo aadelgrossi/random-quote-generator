@@ -1,9 +1,10 @@
+/* eslint-disable react/display-name */
 /* eslint-disable import/order */
 /* eslint-disable import/first */
 
-import React from 'react';
+import React, { ReactElement } from 'react';
 
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { mount } from 'enzyme';
 import { mocked } from 'ts-jest/utils';
 
@@ -27,6 +28,8 @@ jest.mock('../hooks/quote.tsx', () => ({
 }));
 
 import { useQuote } from '../hooks/quote';
+import { ThemeProvider } from 'styled-components';
+import light from '../styles/themes/light';
 
 interface QuoteAttributes {
   id: string;
@@ -37,11 +40,22 @@ interface QuoteAttributes {
 
 const useQuoteMocked = mocked(useQuote);
 
+const mountWithTheme = (child: ReactElement) => {
+  return mount(child, {
+    wrappingComponent: ({ children }) => (
+      <ThemeProvider theme={light}>{children}</ThemeProvider>
+    ),
+  });
+};
 describe('AuthorQuotes', () => {
   it('should be able show quotes for author in params', async () => {
-    render(<AuthorQuotes />);
+    const { getByText } = render(
+      <ThemeProvider theme={light}>
+        <AuthorQuotes />
+      </ThemeProvider>,
+    );
 
-    expect(screen.getByText('David Duchovny')).toBeInTheDocument();
+    expect(getByText('David Duchovny')).toBeInTheDocument();
   });
 
   it('should render author quotes', () => {
@@ -73,7 +87,7 @@ describe('AuthorQuotes', () => {
       ],
     });
 
-    const wrapper = mount(<AuthorQuotes />);
+    const wrapper = mountWithTheme(<AuthorQuotes />);
     expect(wrapper.find(Quote).length).toBe(3);
 
     expect(wrapper.find(Quote).at(0).text()).toContain(
