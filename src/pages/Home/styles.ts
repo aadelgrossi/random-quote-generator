@@ -53,10 +53,10 @@ export const Author = styled(Link)`
   }
 
   &:hover {
-    background-color: ${props => props.theme.colors.hoverBackground};
+    background-color: ${props => props.theme.colors.hover};
     span {
       h3 {
-        color: #f2f2f2;
+        color: ${props => props.theme.colors.primary};
       }
       span {
         color: ${props => props.theme.colors.tertiary};
@@ -64,7 +64,7 @@ export const Author = styled(Link)`
     }
 
     svg {
-      color: ${props => props.theme.colors.button};
+      color: ${props => props.theme.colors.primary};
     }
   }
 `;

@@ -6,7 +6,6 @@ export default {
     secondary: '#4f4f4f',
     tertiary: '#828282',
     background: '#fff',
-    hoverBackground: '#333',
-    button: '#fff',
+    hover: '#333',
   },
 };

@@ -3,10 +3,9 @@ export default {
   colors: {
     primary: '#111',
     text: '#eee',
-    secondary: '#4f4f4f',
+    secondary: '#dfdfdf',
     tertiary: '#767676',
     background: '#000',
-    hoverBackground: '#1a1a1a',
-    button: '#ddd',
+    hover: '#ccc',
   },
 };

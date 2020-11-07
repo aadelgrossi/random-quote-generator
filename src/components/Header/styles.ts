@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { shade } from 'polished';
 
 export const Wrapper = styled.div`
   background-color: ${props => props.theme.colors.background};
@@ -31,7 +30,7 @@ export const Container = styled.div`
     }
 
     &:hover {
-      color: ${shade(0.2, '#f4ede8')};
+      color: ${props => props.theme.colors.hover};
     }
   }
 `;
