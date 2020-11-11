@@ -5,6 +5,11 @@
 import '@testing-library/jest-dom/extend-expect';
 import Enzyme from 'enzyme';
 import EnzymeAdapter from 'enzyme-adapter-react-16';
+import { cache } from 'swr';
 
 // Setup enzyme's react adapter
 Enzyme.configure({ adapter: new EnzymeAdapter() });
+
+afterEach(() => {
+  cache.clear();
+});

@@ -2,9 +2,10 @@ import React from 'react';
 
 import { act, fireEvent, render } from '@testing-library/react';
 import MockAdapter from 'axios-mock-adapter';
+import { SWRConfig } from 'swr';
 
 import App from '../App';
-import api from '../services/api';
+import { api } from '../services/api';
 
 const apiMock = new MockAdapter(api);
 
@@ -24,7 +25,11 @@ describe('Home', () => {
   });
 
   it('should be able to render a random quote', async () => {
-    const { getByTestId } = render(<App />);
+    const { findByText } = render(
+      <SWRConfig value={{ dedupingInterval: 0 }}>
+        <App />
+      </SWRConfig>,
+    );
 
     apiMock.onGet('/quotes/random').replyOnce(200, {
       statusCode: 200,
@@ -34,21 +39,26 @@ describe('Home', () => {
           "They just didn't have the sense of the strength of their vote. Just thought it wasn't necessary.",
         quoteAuthor: 'Charles Phillips',
         quoteGenre: 'strength',
-        __v: 0,
       },
     });
 
-    await actWait();
+    expect(
+      await findByText(
+        "They just didn't have the sense of the strength of their vote. Just thought it wasn't necessary.",
+      ),
+    ).toBeInTheDocument();
 
-    expect(getByTestId('quote-content')).toHaveTextContent(
-      "They just didn't have the sense of the strength of their vote. Just thought it wasn't necessary.",
-    );
-    expect(getByTestId('quote-author')).toHaveTextContent('Charles Phillips');
-    expect(getByTestId('quote-genre')).toHaveTextContent('strength');
+    expect(await findByText('Charles Phillips')).toBeInTheDocument();
+
+    expect(await findByText('strength')).toBeInTheDocument();
   });
 
   it('should fetch and render a new quote when header button is pressed', async () => {
-    const { getByTestId, getByText } = render(<App />);
+    const { findByText, getByText } = render(
+      <SWRConfig value={{ dedupingInterval: 0 }}>
+        <App />
+      </SWRConfig>,
+    );
 
     apiMock.onGet('/quotes/random').replyOnce(200, {
       statusCode: 200,
@@ -58,15 +68,14 @@ describe('Home', () => {
           "As a kid, all I thought about was death. But you can't tell your parents that.",
         quoteAuthor: 'Maurice Sendak',
         quoteGenre: 'death',
-        __v: 0,
       },
     });
 
-    await actWait(500);
-
-    expect(getByTestId('quote-content')).toHaveTextContent(
-      "As a kid, all I thought about was death. But you can't tell your parents that.",
-    );
+    expect(
+      await findByText(
+        "As a kid, all I thought about was death. But you can't tell your parents that.",
+      ),
+    ).toBeInTheDocument();
 
     await actWait(500);
 
@@ -78,7 +87,6 @@ describe('Home', () => {
           'I always say you can never be extravagant with beauty. Beauty is God made real. Beauty is life.',
         quoteAuthor: 'Imelda Marcos',
         quoteGenre: 'beauty',
-        __v: 0,
       },
     });
 
@@ -88,19 +96,23 @@ describe('Home', () => {
 
     await actWait();
 
-    expect(getByTestId('quote-content')).toHaveTextContent(
-      'I always say you can never be extravagant with beauty. Beauty is God made real. Beauty is life.',
-    );
+    expect(
+      await findByText(
+        'I always say you can never be extravagant with beauty. Beauty is God made real. Beauty is life.',
+      ),
+    ).toBeInTheDocument();
   });
 
-  it('should redirect to Home when clicking header button on Author Quotes page', async () => {
-    const { getByTestId, getByText } = render(<App />);
+  it('should redirect to Home when back button on Author Quotes page', async () => {
+    const { getByTestId } = render(
+      <SWRConfig value={{ dedupingInterval: 0 }}>
+        <App />
+      </SWRConfig>,
+    );
 
     apiMock.onGet('/quotes/random').replyOnce(200, {
       statusCode: 200,
       quote: {
-        _id: '5d91b45d9980192a317c880e',
-        quoteText: 'Learn from yesterday, live for today, hope for tomorrow.',
         quoteAuthor: 'Albert Einstein',
       },
     });
@@ -119,37 +131,31 @@ describe('Home', () => {
       ],
     });
 
-    apiMock.onGet('/quotes/random').reply(200, {
-      statusCode: 200,
-      quote: {
-        _id: '5d91b45d9980192a317c9cca',
-        quoteText: 'When in doubt, tell the truth.',
-        quoteAuthor: 'Mark Twain',
-      },
-    });
+    expect(window.location.pathname).toEqual('/');
 
     await actWait(500);
 
     fireEvent.click(getByTestId('author-button'));
 
+    await actWait();
+
     expect(window.location.pathname).toEqual(
       encodeURI('/authors/Albert Einstein'),
     );
 
-    await actWait(500);
-
-    fireEvent.click(getByText('random'));
-
-    await actWait(500);
+    act(() => {
+      fireEvent.click(getByTestId('back'));
+    });
 
     expect(window.location.pathname).toEqual('/');
-    expect(getByTestId('quote-content')).toHaveTextContent(
-      'When in doubt, tell the truth.',
-    );
   });
 
   it('should be able to navigate to author quotes page', async () => {
-    const { getByTestId } = render(<App />);
+    const { getByTestId } = render(
+      <SWRConfig value={{ dedupingInterval: 0 }}>
+        <App />
+      </SWRConfig>,
+    );
 
     apiMock.onGet('/quotes/random').replyOnce(200, {
       statusCode: 200,
@@ -159,7 +165,6 @@ describe('Home', () => {
           "They just didn't have the sense of the strength of their vote. Just thought it wasn't necessary.",
         quoteAuthor: 'Charles Phillips',
         quoteGenre: 'strength',
-        __v: 0,
       },
     });
 
