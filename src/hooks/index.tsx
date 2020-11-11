@@ -1,12 +1,7 @@
 import React from 'react';
 
-import { QuoteProvider } from './quote';
 import { Theme } from './theme';
 
-const AppProvider: React.FC = ({ children }) => (
-  <Theme>
-    <QuoteProvider> {children} </QuoteProvider>
-  </Theme>
-);
+const AppProvider: React.FC = ({ children }) => <Theme>{children}</Theme>;
 
 export default AppProvider;
