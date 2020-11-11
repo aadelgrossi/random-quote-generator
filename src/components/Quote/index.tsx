@@ -9,7 +9,7 @@ interface QuoteProps {
 const Quote: React.FC<QuoteProps> = ({ content }) => {
   return (
     <Container>
-      <p data-testid="quote-content">{content}</p>
+      <p>{content}</p>
     </Container>
   );
 };

@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  background-color: ${props => props.theme.colors.background};
-  color: ${props => props.theme.colors.text};
+  background-color: ${({ theme }) => theme.colors.background};
+  color: ${({ theme }) => theme.colors.text};
 `;
 
 export const Contents = styled.div`
@@ -11,6 +11,37 @@ export const Contents = styled.div`
 
   @media (max-width: 720px) {
     margin: 20vh 4rem;
+  }
+`;
+
+export const Header = styled.div`
+  display: flex;
+  flex-direction: row;
+
+  position: sticky;
+  margin: 10vh 5vw 0;
+
+  button {
+    color: ${({ theme }) => theme.colors.tertiary};
+
+    display: block;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+
+    transition: color 150ms ease-in-out;
+
+    font-size: 18px;
+    margin-right: 11px;
+
+    > svg {
+      margin-left: 11px;
+      vertical-align: middle;
+    }
+
+    &:hover {
+      color: ${({ theme }) => theme.colors.hover};
+    }
   }
 `;
 
@@ -40,11 +71,11 @@ export const Author = styled(Link)`
 
     h3 {
       font-weight: bold;
-      color: ${props => props.theme.colors.secondary};
+      color: ${({ theme }) => theme.colors.secondary};
     }
 
     span {
-      color: ${props => props.theme.colors.tertiary};
+      color: ${({ theme }) => theme.colors.tertiary};
     }
   }
 
@@ -53,18 +84,18 @@ export const Author = styled(Link)`
   }
 
   &:hover {
-    background-color: ${props => props.theme.colors.hover};
+    background-color: ${({ theme }) => theme.colors.hover};
     span {
       h3 {
-        color: ${props => props.theme.colors.primary};
+        color: ${({ theme }) => theme.colors.primary};
       }
       span {
-        color: ${props => props.theme.colors.tertiary};
+        color: ${({ theme }) => theme.colors.tertiary};
       }
     }
 
     svg {
-      color: ${props => props.theme.colors.primary};
+      color: ${({ theme }) => theme.colors.primary};
     }
   }
 `;

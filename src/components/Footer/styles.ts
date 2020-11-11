@@ -1,18 +1,16 @@
 import styled from 'styled-components';
 
-export const Wrapper = styled.div`
-  height: 100%;
-  background: ${props => props.theme.colors.background};
+export const Container = styled.div`
+  background-color: ${({ theme }) => theme.colors.background};
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
   align-items: center;
-`;
+  height: 100%;
 
-export const Container = styled.div`
   p {
+    margin-top: auto;
     margin-bottom: 1rem;
-    color: ${props => props.theme.colors.tertiary};
+    color: ${({ theme }) => theme.colors.tertiary};
     font-family: 'Montserrat';
     font-size: 0.7em;
   }

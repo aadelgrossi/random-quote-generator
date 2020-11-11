@@ -17,7 +17,7 @@ export const DotWrapper = styled.div`
 `;
 
 export const Dot = styled.div<DotProps>`
-  background-color: ${props => props.theme.colors.secondary};
+  background-color: ${({ theme }) => theme.colors.secondary};
   border-radius: 50%;
   width: 10px;
   height: 10px;

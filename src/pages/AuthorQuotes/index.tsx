@@ -1,11 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import { MdArrowBack } from 'react-icons/md';
 import { useHistory, useParams } from 'react-router-dom';
+import useSWR from 'swr';
 
 import Loading from '../../components/LoadingDots';
 import Quote from '../../components/Quote';
-import { useQuote } from '../../hooks/quote';
+import { getAuthorQuotes } from '../../services/api';
 import {
   BackButton,
   BackgroundWrapper,
@@ -16,31 +17,34 @@ import {
 } from './styles';
 
 const AuthorQuotes: React.FC = () => {
-  const { getAllFromAuthor, loading, quotesFromAuthor } = useQuote();
-  const { name } = useParams();
   const history = useHistory();
-
-  useEffect(() => {
-    getAllFromAuthor(name);
-  }, [getAllFromAuthor, name]);
+  const { name } = useParams<{ name: string }>();
+  const { data, isValidating } = useSWR(
+    'authorQuotes',
+    () => getAuthorQuotes(name),
+    {
+      refreshInterval: 0,
+      revalidateOnFocus: false,
+    },
+  );
 
   return (
     <BackgroundWrapper>
       <Container>
         <Header>
-          <BackButton onClick={() => history.goBack()}>
+          <BackButton data-testid="back" onClick={() => history.push('/')}>
             <MdArrowBack size="24px" />
           </BackButton>
           <h2>{name}</h2>
         </Header>
-        {loading ? (
+        {!data || isValidating ? (
           <LoadingContainer>
             <Loading />
           </LoadingContainer>
         ) : (
           <Quotes>
-            {quotesFromAuthor.map(quote => (
-              <Quote key={quote.id} content={quote.text} />
+            {data.quotes.map(quote => (
+              <Quote key={quote._id} content={quote.quoteText} />
             ))}
           </Quotes>
         )}
