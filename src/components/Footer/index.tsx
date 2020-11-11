@@ -1,14 +1,12 @@
 import React from 'react';
 
-import { Container, Wrapper } from './styles';
+import { Container } from './styles';
 
 const Footer: React.FC = () => {
   return (
-    <Wrapper>
-      <Container>
-        <p>Andre Grossi @ DevChallenges.io</p>
-      </Container>
-    </Wrapper>
+    <Container>
+      <p>Andre Grossi @ DevChallenges.io</p>
+    </Container>
   );
 };
 
