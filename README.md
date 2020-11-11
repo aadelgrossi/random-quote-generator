@@ -20,7 +20,7 @@ $ yarn start
 ## :construction:  TODO
 - :ballot_box_with_check: Live demo
 - :ballot_box_with_check: Tests
-- :x: Replace axios with swr, simplify hook
+- :ballot_box_with_check: Wrap API calls with SWR 
 - :ballot_box_with_check: Loading state
 - :ballot_box_with_check: Dark/light theme switcher
 - :x: Animations and transitions
