@@ -13,7 +13,7 @@ import { getRandom } from '../../services/api';
 import { Author, Container, Contents, Header } from './styles';
 
 const Home: React.FC = () => {
-  const { data, mutate } = useSWR('random', getRandom, {
+  const { data, mutate, isValidating } = useSWR('random', getRandom, {
     refreshInterval: 0,
     revalidateOnFocus: false,
   });
@@ -21,7 +21,7 @@ const Home: React.FC = () => {
 
   const getNewQuote = useCallback(() => {
     mutate();
-  }, []);
+  }, [mutate]);
 
   return (
     <Container>
@@ -44,7 +44,7 @@ const Home: React.FC = () => {
       </Header>
 
       <Contents>
-        {!data ? (
+        {!data || isValidating ? (
           <Loading />
         ) : (
           <>

@@ -19,10 +19,14 @@ import {
 const AuthorQuotes: React.FC = () => {
   const history = useHistory();
   const { name } = useParams<{ name: string }>();
-  const { data } = useSWR('authorQuotes', () => getAuthorQuotes(name), {
-    refreshInterval: 0,
-    revalidateOnFocus: false,
-  });
+  const { data, isValidating } = useSWR(
+    'authorQuotes',
+    () => getAuthorQuotes(name),
+    {
+      refreshInterval: 0,
+      revalidateOnFocus: false,
+    },
+  );
 
   return (
     <BackgroundWrapper>
@@ -33,7 +37,7 @@ const AuthorQuotes: React.FC = () => {
           </BackButton>
           <h2>{name}</h2>
         </Header>
-        {!data ? (
+        {!data || isValidating ? (
           <LoadingContainer>
             <Loading />
           </LoadingContainer>
