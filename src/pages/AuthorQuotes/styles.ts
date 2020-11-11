@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const BackgroundWrapper = styled.div`
-  height: 100%;
   background-color: ${({ theme }) => theme.colors.background};
   color: ${({ theme }) => theme.colors.text};
 `;
