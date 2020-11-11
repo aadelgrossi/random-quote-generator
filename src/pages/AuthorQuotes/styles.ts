@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
 export const BackgroundWrapper = styled.div`
-  background-color: ${props => props.theme.colors.background};
-  color: ${props => props.theme.colors.text};
+  height: 100%;
+  background-color: ${({ theme }) => theme.colors.background};
+  color: ${({ theme }) => theme.colors.text};
 `;
 
 export const Container = styled.div`
@@ -29,12 +30,12 @@ export const BackButton = styled.button`
   }
 
   &:hover {
-    color: ${props => props.theme.colors.hover};
+    color: ${({ theme }) => theme.colors.hover};
   }
 `;
 
 export const Header = styled.div`
-  margin-top: 5rem;
+  margin-top: 20vh;
   display: flex;
   flex-direction: row;
 

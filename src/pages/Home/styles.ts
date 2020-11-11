@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   height: 100%;
-  background-color: ${props => props.theme.colors.background};
-  color: ${props => props.theme.colors.text};
+  background-color: ${({ theme }) => theme.colors.background};
+  color: ${({ theme }) => theme.colors.text};
 `;
 
 export const Contents = styled.div`
@@ -23,7 +23,7 @@ export const Header = styled.div`
   margin: 10vh 5vw 0;
 
   button {
-    color: ${props => props.theme.colors.tertiary};
+    color: ${({ theme }) => theme.colors.tertiary};
 
     display: block;
     justify-content: center;
@@ -41,7 +41,7 @@ export const Header = styled.div`
     }
 
     &:hover {
-      color: ${props => props.theme.colors.hover};
+      color: ${({ theme }) => theme.colors.hover};
     }
   }
 `;
@@ -72,11 +72,11 @@ export const Author = styled(Link)`
 
     h3 {
       font-weight: bold;
-      color: ${props => props.theme.colors.secondary};
+      color: ${({ theme }) => theme.colors.secondary};
     }
 
     span {
-      color: ${props => props.theme.colors.tertiary};
+      color: ${({ theme }) => theme.colors.tertiary};
     }
   }
 
@@ -85,18 +85,18 @@ export const Author = styled(Link)`
   }
 
   &:hover {
-    background-color: ${props => props.theme.colors.hover};
+    background-color: ${({ theme }) => theme.colors.hover};
     span {
       h3 {
-        color: ${props => props.theme.colors.primary};
+        color: ${({ theme }) => theme.colors.primary};
       }
       span {
-        color: ${props => props.theme.colors.tertiary};
+        color: ${({ theme }) => theme.colors.tertiary};
       }
     }
 
     svg {
-      color: ${props => props.theme.colors.primary};
+      color: ${({ theme }) => theme.colors.primary};
     }
   }
 `;
