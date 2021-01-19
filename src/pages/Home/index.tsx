@@ -1,62 +1,35 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 
-import { MdCached, MdTrendingFlat } from 'react-icons/md';
-import Switch from 'react-switch';
+import { MdTrendingFlat } from 'react-icons/md';
 import useSWR from 'swr';
 
-import DarkIcon from '../../components/DarkIcon';
-import LightIcon from '../../components/LightIcon';
+import Header from '../../components/Header';
 import Loading from '../../components/LoadingDots';
 import Quote from '../../components/Quote';
-import { useTheme } from '../../hooks/theme';
 import { getRandom } from '../../services/api';
-import { Author, Container, Contents, Header } from './styles';
+import { Author, Container, Contents } from './styles';
 
 const Home: React.FC = () => {
-  const { data, mutate, isValidating } = useSWR('random', getRandom, {
-    refreshInterval: 0,
-    revalidateOnFocus: false,
-  });
-  const { theme, toggleTheme } = useTheme();
-
-  const getNewQuote = useCallback(() => {
-    mutate();
-  }, [mutate]);
+  const { data: response, mutate, isValidating } = useSWR('random', getRandom);
 
   return (
     <Container>
-      <Header>
-        <Switch
-          onChange={toggleTheme}
-          checked={theme.title === 'light'}
-          onHandleColor={theme.colors.primary}
-          offHandleColor={theme.colors.primary}
-          onColor={theme.colors.secondary}
-          offColor={theme.colors.secondary}
-          width={60}
-          uncheckedIcon={<DarkIcon />}
-          checkedIcon={<LightIcon />}
-        />
-        <button type="button" onClick={getNewQuote}>
-          random
-          <MdCached />
-        </button>
-      </Header>
+      <Header getNewQuote={mutate} />
 
       <Contents>
-        {!data || isValidating ? (
+        {!response?.data || isValidating ? (
           <Loading />
         ) : (
           <>
-            <Quote content={data.quote.quoteText} />
+            <Quote content={response.data[0].quoteText} />
 
             <Author
               data-testid="author-button"
-              to={`/authors/${data.quote.quoteAuthor}`}
+              to={`/authors/${response.data[0].quoteAuthor}`}
             >
               <span>
-                <h3>{data.quote.quoteAuthor}</h3>
-                <span>{data.quote.quoteGenre}</span>
+                <h3>{response.data[0].quoteAuthor}</h3>
+                <span>{response.data[0].quoteGenre}</span>
               </span>
               <MdTrendingFlat size="1.5em" />
             </Author>
