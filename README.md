@@ -10,10 +10,13 @@ This is a solution for the [random-quote-generator](https://devchallenges.io/cha
 Clone the repository and install dependencies by running.
 
 ```sh
+# Clone the repo
+git clone https://github.com/aadelgrossi/random-quote-generator.git
+
+# Install dependencies
 $ yarn
-```
-Run the app server with:
-```sh
+
+# Run the app with:
 $ yarn start
 ```
 
