@@ -4,9 +4,7 @@ import { MdArrowBack } from 'react-icons/md';
 import { useHistory, useParams } from 'react-router-dom';
 import useSWR from 'swr';
 
-import Header from '../../components/Header';
-import Loading from '../../components/LoadingDots';
-import Quote from '../../components/Quote';
+import { Header, Loading, Quote } from '../../components';
 import { getAuthorQuotes } from '../../services/api';
 import {
   BackButton,

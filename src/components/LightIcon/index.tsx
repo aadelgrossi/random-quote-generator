@@ -5,7 +5,7 @@ import { ThemeContext } from 'styled-components';
 
 import { Container } from './styles';
 
-const LightIcon: React.FC = () => {
+export const LightIcon: React.FC = () => {
   const { colors } = useContext(ThemeContext);
   return (
     <Container>
@@ -13,5 +13,3 @@ const LightIcon: React.FC = () => {
     </Container>
   );
 };
-
-export default LightIcon;

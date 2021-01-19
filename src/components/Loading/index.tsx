@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { DotWrapper, Dot } from './styles';
+import { Dot, DotWrapper } from './styles';
 
-const LoadingDots: React.FC = () => (
+export const Loading: React.FC = () => (
   <DotWrapper>
     <Dot delay="0s" />
     <Dot delay=".1s" />
@@ -10,4 +10,4 @@ const LoadingDots: React.FC = () => (
   </DotWrapper>
 );
 
-export default LoadingDots;
+export default Loading;

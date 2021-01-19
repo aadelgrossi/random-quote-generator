@@ -5,7 +5,7 @@ import { ThemeContext } from 'styled-components';
 
 import { Container } from './styles';
 
-const DarkIcon: React.FC = () => {
+export const DarkIcon: React.FC = () => {
   const { colors } = useContext(ThemeContext);
   return (
     <Container>
@@ -13,5 +13,3 @@ const DarkIcon: React.FC = () => {
     </Container>
   );
 };
-
-export default DarkIcon;

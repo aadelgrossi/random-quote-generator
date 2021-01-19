@@ -4,7 +4,7 @@ import './assets/fonts';
 import { BrowserRouter } from 'react-router-dom';
 import { SWRConfig } from 'swr';
 
-import Footer from './components/Footer';
+import { Footer } from './components';
 import AppProvider from './hooks';
 import Routes from './routes';
 import GlobalStyle from './styles/global';

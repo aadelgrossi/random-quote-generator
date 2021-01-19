@@ -4,16 +4,15 @@ import { MdCached } from 'react-icons/md';
 import { useLocation } from 'react-router-dom';
 import Switch from 'react-switch';
 
+import { DarkIcon, LightIcon } from '..';
 import { useTheme } from '../../hooks/theme';
-import DarkIcon from '../DarkIcon';
-import LightIcon from '../LightIcon';
 import { Container } from './styles';
 
 interface HeaderProps {
   getNewQuote?: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ getNewQuote = () => null }) => {
+export const Header: React.FC<HeaderProps> = ({ getNewQuote = () => null }) => {
   const { pathname } = useLocation();
   const {
     theme: { colors, title },
@@ -42,5 +41,3 @@ const Header: React.FC<HeaderProps> = ({ getNewQuote = () => null }) => {
     </Container>
   );
 };
-
-export default Header;

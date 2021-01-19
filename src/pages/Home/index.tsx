@@ -3,9 +3,7 @@ import React from 'react';
 import { MdTrendingFlat } from 'react-icons/md';
 import useSWR from 'swr';
 
-import Header from '../../components/Header';
-import Loading from '../../components/LoadingDots';
-import Quote from '../../components/Quote';
+import { Header, Loading, Quote } from '../../components';
 import { getRandom } from '../../services/api';
 import { Author, Container, Contents } from './styles';
 
