@@ -11,7 +11,7 @@ Clone the repository and install dependencies by running.
 
 ```sh
 # Clone the repo
-git clone https://github.com/aadelgrossi/random-quote-generator.git
+$ git clone https://github.com/aadelgrossi/random-quote-generator.git
 
 # Install dependencies
 $ yarn
