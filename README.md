@@ -4,7 +4,7 @@ Get a dose of inspiration with a random quote from [QuoteGarden API](https://ppr
 
 Check out a [live demo](https://random-quote.andregrossi.com/) :arrow_forward:
 
-This is a solution for the [random-quote-generator](https://devchallenges.io/challenges/8Y3J4ucAMQpSnYTwwWW8) dev challenge. Developed using Typescript React with a custom hook courtesy of React's rich Context API. Fully responsive design using styled-components.
+This is a solution for the [random-quote-generator](https://devchallenges.io/challenges/8Y3J4ucAMQpSnYTwwWW8) dev challenge. Developed using Typescript and React. Fully responsive design using styled-components with theme switcher and loading animations.
 
 ##  :wrench: Setup & Installation
 Clone the repository and install dependencies by running.
@@ -20,11 +20,10 @@ $ yarn start
 ## :construction:  TODO
 - :ballot_box_with_check: Live demo
 - :ballot_box_with_check: Tests
-- :ballot_box_with_check: Wrap API calls with SWR 
+- :ballot_box_with_check: Use SWR for data fetching 
 - :ballot_box_with_check: Loading state
 - :ballot_box_with_check: Dark/light theme switcher
 - :x: Animations and transitions
-- :x: Full text search
 - :x: Pagination
 
 License
