@@ -2,11 +2,10 @@ import React from 'react';
 
 import { render } from '@testing-library/react';
 import MockAdapter from 'axios-mock-adapter';
-import { ThemeProvider } from 'styled-components';
 
+import AppProvider from '../hooks';
 import AuthorQuotes from '../pages/AuthorQuotes';
 import { api } from '../services/api';
-import light from '../styles/themes/light';
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
@@ -14,28 +13,30 @@ jest.mock('react-router-dom', () => ({
     name: 'David Duchovny',
   }),
   useRouteMatch: () => ({ url: '/authors/David Duchovny' }),
+  useLocation: () => ({
+    pathname: '/authors/David%20Duchovny',
+  }),
 }));
 
 const apiMock = new MockAdapter(api);
 
+const AuthorQuotesWrapped = () => (
+  <AppProvider>
+    <AuthorQuotes />
+  </AppProvider>
+);
+
 describe('AuthorQuotes', () => {
   it('should be able show author name in page received from params', async () => {
-    const { getByText } = render(
-      <ThemeProvider theme={light}>
-        <AuthorQuotes />
-      </ThemeProvider>,
-    );
+    const { getByText } = render(<AuthorQuotesWrapped />);
 
     expect(getByText('David Duchovny')).toBeInTheDocument();
   });
 
   it('should render author quotes', async () => {
-    apiMock.onGet('/authors/David Duchovny?page=1&limit=5').replyOnce(200, {
+    apiMock.onGet('?author=David Duchovny&page=1&limit=5').replyOnce(200, {
       statusCode: 200,
-      message: 'Quotes by David Duchovny',
-      totalPages: 15619,
-      currentPage: 1,
-      quotes: [
+      data: [
         {
           _id: '5eb17aadb69dc744b4e70f1e',
           quoteText:
@@ -58,11 +59,7 @@ describe('AuthorQuotes', () => {
       ],
     });
 
-    const { findByText } = render(
-      <ThemeProvider theme={light}>
-        <AuthorQuotes />
-      </ThemeProvider>,
-    );
+    const { findByText } = render(<AuthorQuotesWrapped />);
 
     expect(
       await findByText(

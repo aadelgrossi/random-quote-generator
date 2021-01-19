@@ -2,7 +2,6 @@ import React from 'react';
 
 import { act, fireEvent, render } from '@testing-library/react';
 import MockAdapter from 'axios-mock-adapter';
-import { SWRConfig } from 'swr';
 
 import App from '../App';
 import { api } from '../services/api';
@@ -19,27 +18,31 @@ const actWait = async (amount = 0): Promise<void> => {
   });
 };
 
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useLocation: () => ({
+    pathname: '/',
+  }),
+}));
+
 describe('Home', () => {
   beforeEach(() => {
     apiMock.reset();
   });
 
   it('should be able to render a random quote', async () => {
-    const { findByText } = render(
-      <SWRConfig value={{ dedupingInterval: 0 }}>
-        <App />
-      </SWRConfig>,
-    );
+    const { findByText } = render(<App />);
 
-    apiMock.onGet('/quotes/random').replyOnce(200, {
+    apiMock.onGet('/random').replyOnce(200, {
       statusCode: 200,
-      quote: {
-        _id: '5eb17ab3b69dc744b4e80ba5',
-        quoteText:
-          "They just didn't have the sense of the strength of their vote. Just thought it wasn't necessary.",
-        quoteAuthor: 'Charles Phillips',
-        quoteGenre: 'strength',
-      },
+      data: [
+        {
+          quoteText:
+            "They just didn't have the sense of the strength of their vote. Just thought it wasn't necessary.",
+          quoteAuthor: 'Charles Phillips',
+          quoteGenre: 'strength',
+        },
+      ],
     });
 
     expect(
@@ -54,21 +57,18 @@ describe('Home', () => {
   });
 
   it('should fetch and render a new quote when header button is pressed', async () => {
-    const { findByText, getByText } = render(
-      <SWRConfig value={{ dedupingInterval: 0 }}>
-        <App />
-      </SWRConfig>,
-    );
+    const { findByText, getByText } = render(<App />);
 
-    apiMock.onGet('/quotes/random').replyOnce(200, {
+    apiMock.onGet('/random').replyOnce(200, {
       statusCode: 200,
-      quote: {
-        _id: '5eb17aaeb69dc744b4e74356',
-        quoteText:
-          "As a kid, all I thought about was death. But you can't tell your parents that.",
-        quoteAuthor: 'Maurice Sendak',
-        quoteGenre: 'death',
-      },
+      data: [
+        {
+          quoteText:
+            "As a kid, all I thought about was death. But you can't tell your parents that.",
+          quoteAuthor: 'Maurice Sendak',
+          quoteGenre: 'death',
+        },
+      ],
     });
 
     expect(
@@ -79,15 +79,16 @@ describe('Home', () => {
 
     await actWait(500);
 
-    apiMock.onGet('/quotes/random').replyOnce(200, {
+    apiMock.onGet('/random').replyOnce(200, {
       statusCode: 200,
-      quote: {
-        _id: '5eb17aadb69dc744b4e72248',
-        quoteText:
-          'I always say you can never be extravagant with beauty. Beauty is God made real. Beauty is life.',
-        quoteAuthor: 'Imelda Marcos',
-        quoteGenre: 'beauty',
-      },
+      data: [
+        {
+          quoteText:
+            'I always say you can never be extravagant with beauty. Beauty is God made real. Beauty is life.',
+          quoteAuthor: 'Imelda Marcos',
+          quoteGenre: 'beauty',
+        },
+      ],
     });
 
     await actWait(500);
@@ -104,28 +105,29 @@ describe('Home', () => {
   });
 
   it('should redirect to Home when back button on Author Quotes page', async () => {
-    const { getByTestId } = render(
-      <SWRConfig value={{ dedupingInterval: 0 }}>
-        <App />
-      </SWRConfig>,
-    );
+    const { getByTestId } = render(<App />);
 
-    apiMock.onGet('/quotes/random').replyOnce(200, {
+    apiMock.onGet('/random').replyOnce(200, {
       statusCode: 200,
-      quote: {
-        quoteAuthor: 'Albert Einstein',
-      },
+      data: [
+        {
+          quoteAuthor: 'Albert Einstein',
+        },
+      ],
     });
 
-    apiMock.onGet('/authors/Albert Einstein?page=1&limit=5').replyOnce(200, {
+    apiMock.onGet('?author=Albert Einstein&page=1&limit=5').replyOnce(200, {
       statusCode: 200,
-      message: 'Quotes by Albert Einstein',
-      totalPages: 39047,
-      currentPage: 1,
-      quotes: [
+      data: [
         {
-          _id: '5d91b45d9980192a317c87fd',
+          _id: '5eb17aadb69dc744b4e7156c',
           quoteText: 'God always takes the simplest way.',
+          quoteAuthor: 'Albert Einstein',
+        },
+        {
+          _id: '5eb17aad2g99444b4e7156c',
+          quoteText:
+            'Perfection of means and confusion of ends seem to characterize our age.',
           quoteAuthor: 'Albert Einstein',
         },
       ],
@@ -143,44 +145,40 @@ describe('Home', () => {
       encodeURI('/authors/Albert Einstein'),
     );
 
-    act(() => {
-      fireEvent.click(getByTestId('back'));
-    });
+    await actWait();
+
+    fireEvent.click(getByTestId('back'));
+
+    await actWait();
 
     expect(window.location.pathname).toEqual('/');
   });
 
   it('should be able to navigate to author quotes page', async () => {
-    const { getByTestId } = render(
-      <SWRConfig value={{ dedupingInterval: 0 }}>
-        <App />
-      </SWRConfig>,
-    );
+    const { getByTestId } = render(<App />);
 
-    apiMock.onGet('/quotes/random').replyOnce(200, {
+    apiMock.onGet('/random').replyOnce(200, {
       statusCode: 200,
-      quote: {
-        _id: '5eb17ab3b69dc744b4e80ba5',
-        quoteText:
-          "They just didn't have the sense of the strength of their vote. Just thought it wasn't necessary.",
-        quoteAuthor: 'Charles Phillips',
-        quoteGenre: 'strength',
-      },
-    });
-
-    apiMock.onGet('/authors/Charles Phillips?page=1&limit=5').replyOnce(200, {
-      statusCode: 200,
-      message: 'Quotes by Charles Phillips',
-      totalPages: 15619,
-      currentPage: 1,
-      quotes: [
+      data: [
         {
           _id: '5eb17ab3b69dc744b4e80ba5',
           quoteText:
             "They just didn't have the sense of the strength of their vote. Just thought it wasn't necessary.",
           quoteAuthor: 'Charles Phillips',
           quoteGenre: 'strength',
-          __v: 0,
+        },
+      ],
+    });
+
+    apiMock.onGet('?author=Charles Phillips&page=1&limit=5').replyOnce(200, {
+      statusCode: 200,
+      data: [
+        {
+          _id: '5eb17ab3b69dc744b4e80ba5',
+          quoteText:
+            "They just didn't have the sense of the strength of their vote. Just thought it wasn't necessary.",
+          quoteAuthor: 'Charles Phillips',
+          quoteGenre: 'strength',
         },
       ],
     });
