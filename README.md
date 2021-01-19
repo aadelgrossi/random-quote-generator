@@ -16,7 +16,7 @@ git clone https://github.com/aadelgrossi/random-quote-generator.git
 # Install dependencies
 $ yarn
 
-# Run the app with:
+# Run the app
 $ yarn start
 ```
 
