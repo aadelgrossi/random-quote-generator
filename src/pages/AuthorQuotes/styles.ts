@@ -33,7 +33,7 @@ export const BackButton = styled.button`
   }
 `;
 
-export const Header = styled.div`
+export const Title = styled.div`
   margin-top: 20vh;
   display: flex;
   flex-direction: row;

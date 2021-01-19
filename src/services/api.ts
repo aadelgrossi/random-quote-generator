@@ -1,25 +1,23 @@
 import axios from 'axios';
 
-import { AuthorQuotesResponse, QuoteResponse } from '../dtos/QuotesResponse';
+import { QuoteResponse } from '../dtos/QuotesResponse';
 
 const api = axios.create({
-  baseURL: 'https://quote-garden.herokuapp.com/api/v2',
+  baseURL: 'https://quote-garden.herokuapp.com/api/v3/quotes',
 });
 
 const getRandom = async (): Promise<QuoteResponse> => {
-  const response = await api.get<QuoteResponse>('/quotes/random');
+  const { data } = await api.get<QuoteResponse>('/random');
 
-  return response.data;
+  return data;
 };
 
-const getAuthorQuotes = async (
-  authorName: string,
-): Promise<AuthorQuotesResponse> => {
-  const response = await api.get<AuthorQuotesResponse>(
-    `/authors/${authorName}?page=1&limit=5`,
+const getAuthorQuotes = async (authorName: string): Promise<QuoteResponse> => {
+  const { data } = await api.get<QuoteResponse>(
+    `?author=${authorName}&page=1&limit=5`,
   );
 
-  return response.data;
+  return data;
 };
 
 export { getRandom, getAuthorQuotes, api };

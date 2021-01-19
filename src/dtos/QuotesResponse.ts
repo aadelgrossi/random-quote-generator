@@ -1,16 +1,10 @@
-interface QuoteResponseAttributes {
+interface QuoteItemResponse {
   _id: string;
   quoteAuthor: string;
   quoteGenre: string;
   quoteText: string;
 }
 
-interface QuoteResponse {
-  quote: QuoteResponseAttributes;
+export interface QuoteResponse {
+  data: QuoteItemResponse[];
 }
-
-interface AuthorQuotesResponse {
-  quotes: QuoteResponseAttributes[];
-}
-
-export type { QuoteResponse, AuthorQuotesResponse };

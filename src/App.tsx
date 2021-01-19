@@ -2,6 +2,7 @@ import React from 'react';
 
 import './assets/fonts';
 import { BrowserRouter } from 'react-router-dom';
+import { SWRConfig } from 'swr';
 
 import Footer from './components/Footer';
 import AppProvider from './hooks';
@@ -13,8 +14,15 @@ const App: React.FC = () => {
     <>
       <BrowserRouter>
         <AppProvider>
-          <Routes />
-          <Footer />
+          <SWRConfig
+            value={{
+              revalidateOnFocus: false,
+              dedupingInterval: 0,
+            }}
+          >
+            <Routes />
+            <Footer />
+          </SWRConfig>
         </AppProvider>
       </BrowserRouter>
       <GlobalStyle />
